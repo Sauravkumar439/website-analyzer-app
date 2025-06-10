@@ -11,7 +11,7 @@ function App() {
   const analyzeWebsite = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://127.0.0.1:5000/analyze', {
+      const response = await fetch('https://website-analyzer-app.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
