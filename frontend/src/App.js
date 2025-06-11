@@ -7,9 +7,11 @@ function App() {
   const [url, setUrl] = useState('');
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const analyzeWebsite = async () => {
     setLoading(true);
+    setError('');
     try {
       const response = await fetch('https://website-analyzer-app-production.up.railway.app/analyze', {
         method: 'POST',
@@ -18,10 +20,16 @@ function App() {
         },
         body: JSON.stringify({ url }),
       });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
       const data = await response.json();
       setResult(data);
     } catch (error) {
       console.error('Error analyzing website:', error);
+      setError('Failed to fetch data. Please check the backend or CORS settings.');
     }
     setLoading(false);
   };
@@ -51,6 +59,7 @@ function App() {
       <button onClick={analyzeWebsite}>Analyze</button>
 
       {loading && <p>Analyzing...</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {result && result.status === 'success' && (
         <div id="report">
