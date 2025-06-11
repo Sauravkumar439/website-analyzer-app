@@ -26,6 +26,9 @@ def analyze():
     except Exception as e:
         print("Error during analysis:", e)
         return jsonify({'error': 'Internal server error'}), 500
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({'status': 'running'}), 200
 
 if __name__ == '__main__':
     # Railway sets the PORT environment variable dynamically
