@@ -11,7 +11,7 @@ function App() {
   const analyzeWebsite = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://website-analyzer-app-production.up.railway.app', {
+      const response = await fetch('https://website-analyzer-app-production.up.railway.app/analyze', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
