@@ -3,7 +3,11 @@ from flask_cors import CORS
 from analyzer import analyze_website
 
 app = Flask(__name__)
-CORS(app, resources={r"/analyze": {"origins": "http://localhost:3000"}})  # Allow only frontend origin
+CORS(app, resources={r"/analyze": {"origins": [
+    "http://localhost:3000",
+    "https://website-analyzer-app.netlify.app"
+]}})
+  # Allow only frontend origin
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
